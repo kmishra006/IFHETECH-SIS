@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Record Table</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            background-color: navy;
+            color: white;
+            width: 200px;
+            height: 100vh;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .menu-item, .field {
+            padding: 15px;
+            background-color: #003366;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .menu-item:hover, .field:hover {
+            background-color: #002244;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .table-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 95%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .credits {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .grade {
+            font-weight: bold;
+            color: #d35400;
+        }
+        .cgpa {
+            font-weight: bold;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="dashboard.html" class="menu-item">Dashboard</a>
+        <a href="NoticeBoard.html" class="field">Notice Board</a>
+        <a href="Academics.html" class="field">Academics</a>
+        <a href="FeesPayment.html" class="field">Fees Payment</a>
+        <a href="Resources.html" class="field">Resources</a>
+        <a href="Gradelist.html" class="field">Grade List</a>
+        <a href="login.html" class="field">Logout</a>
+    </div>
+    <div class="main-content">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year/Semester</th>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Units</th>
+                        <th>Grade</th>
+                        <th>Cum. Units/CGPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2023-2024 I</td><td>EC101</td><td>Basic Electronics</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td><span class="cgpa">13, 5.46</span></td></tr>
+                    <tr><td>2023-2024 I</td><td>CHY101</td><td>Chemistry</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>CS101</td><td>Computer Programming</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>MT101</td><td>Digital Fabrication</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>EG101</td><td>English Language Skills</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>HS101</td><td>Essence of Indian Traditional Knowledge</td><td><span class="credits">0</span></td><td><span class="grade">S</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>MA101</td><td>Linear Algebra and Ordinary Differential Equations</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>CS102</td><td>Data Structures</td><td><span class="credits">4</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">44, 5.73</span></td></tr>
+                    <tr><td>2023-2024 II</td><td>MT102</td><td>Engineering Graphics</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>CH102</td><td>Environmental Sciences</td><td><span class="credits">2</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>MA102</td><td>Higher Calculus</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>DS101</td><td>Introduction to AI and DS</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>PH101</td><td>Physics</td><td><span class="credits">5</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>EG102</td><td>Professional Communication</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS203</td><td>DESIGN AND ANALYSIS OF ALGORITHMS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">67, 6.10</span></td></tr>
+                    <tr><td>2024-2025 III</td><td>MA202</td><td>DISCRETE MATHEMATICS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>MG201</td><td>ENGINEERING ECONOMICS AND MANAGEMENT</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>MA201</td><td>INTEGRAL TRANSFORMS AND PROBABILITY & STATISTICS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>EC201</td><td>INTRODUCTION TO IOT</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS201</td><td>OBJECT ORIENTED PROGRAMMING CONCEPTS</td><td><span class="credits">4</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CR201</td><td>POWER SKILLS-I</td><td><span class="credits">1</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS202</td><td>THEORY OF COMPUTATION</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS204</td><td>COMPUTER ORGANIZATION AND ARCHITECTURE</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">84, 6.54</span></td></tr>
+                    <tr><td>2024-2025 IV</td><td>DS203</td><td>DATA SCIENCE</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS206</td><td>DATABASE MANAGEMENT SYSTEMS</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>HS201</td><td>DYNAMICS OF SOCIAL CHANGE</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>EC102</td><td>FUNDAMENTALS OF SIGNAL PROCESSING</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>DS202</td><td>INDUSTRY CODING PRACTICE(PYTHON/R)</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CR202</td><td>POWER SKILLS - II</td><td><span class="credits">1</span></td><td><span class="grade">A</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS205</td><td>WEB-ENABLED TECHNOLOGIES</td><td><span class="credits">4</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 ST - II</td><td>IP201</td><td>INTERNSHIP-I</td><td><span class="credits">3</span></td><td><span class="grade">A+</span></td><td><span class="cgpa">87, 6.75</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

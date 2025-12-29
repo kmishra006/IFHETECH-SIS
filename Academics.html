@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            background-color: navy;
+            color: white;
+            width: 200px;
+            height: 100vh;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .menu-item, .field {
+            padding: 15px;
+            background-color: #003366;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .menu-item:hover, .field:hover {
+            background-color: #002244;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            margin-right: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .card {
+            background-color: #f8f8f8;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 20px auto;
+            width: 50%;
+        }
+        .dropdown-main{position:relative;}
+.dropdown-submenu{background:#002244;margin:0 15px 5px 15px;border-radius:0 0 5px 5px;overflow:hidden;max-height:0;transition:max-height 0.3s ease;}
+.dropdown-submenu.active{max-height:500px;}
+.dropdown-submenu .menu-item{margin:0;background:transparent;border-radius:0;}
+.dropdown-submenu .menu-item:hover{background:#001122;}
+.sidebar{width:250px;min-height:100vh;padding:20px 0;overflow:visible;}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+    <h2>IFHE TECH</h2>
+    <a href="dashboard.html" class="menu-item">Dashboard</a>
+    <a href="NoticeBoard.html" class="menu-item">Notice Board</a>
+    <div class="menu-item dropdown-main" onclick="toggleDropdown('academics-submenu')">
+        📚 Academics
+    </div>
+    <div class="dropdown-submenu" id="academics-submenu">
+        <a href="#attendance" class="menu-item" onclick="showTab('attendance')">Attendance</a>
+        <a href="#grade-list" class="menu-item" onclick="showTab('grade-list')">Grade List</a>
+        <a href="#my-faculty" class="menu-item" onclick="showTab('my-faculty')">My Faculty</a>
+        <a href="#resources" class="menu-item" onclick="showTab('resources')">Resources</a>
+        <a href="#electives" class="menu-item" onclick="showTab('electives')">Electives</a>
+    </div>
+    <a href="FeesPayment.html" class="menu-item">Fees Payment</a>
+    <div class="menu-item dropdown-main" onclick="toggleDropdown('helpdesk-submenu')">
+        🆘 Help Desk
+    </div>
+    <div class="dropdown-submenu" id="helpdesk-submenu">
+        <a href="#" class="menu-item" onclick="showHelpDeskForm('complaints')">Complaints</a>
+        <a href="#" class="menu-item" onclick="showHelpDeskForm('leave')">Leave Form</a>
+        <a href="#" class="menu-item" onclick="showHelpDeskForm('certificate')">Certificate(s)</a>
+    </div>
+    <a href="login.html" class="menu-item">Logout</a>
+</div>
+
+    <div class="main-content">
+        <h2>Academics</h2>
+        
+
+        <!-- Attendance Tab -->
+        <div id="attendance" class="tab-content active">
+            <h3>Attendance</h3>
+            <div class="dropdown">
+                <label for="attendance-semester">Select Semester: </label>
+                <select id="attendance-semester" onchange="showAttendance()">
+                    <option value="sem1">2023-2024 I</option>
+                    <option value="sem2">2023-2024 II</option>
+                    <option value="sem3">2024-2025 III</option>
+                    <option value="sem4">2024-2025 IV</option>
+                </select>
+            </div>
+            <table id="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Attendance (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Grade List Tab -->
+        <div id="grade-list" class="tab-content">
+            <h3>Grade List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year/Semester</th>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Units</th>
+                        <th>Grade</th>
+                        <th>Cum. Units/CGPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2023-2024 I</td><td>EC101</td><td>Basic Electronics</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td><span class="cgpa">13, 5.46</span></td></tr>
+                    <tr><td>2023-2024 I</td><td>CHY101</td><td>Chemistry</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>CS101</td><td>Computer Programming</td><td><span class="credits">4</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>MT101</td><td>Digital Fabrication</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>EG101</td><td>English Language Skills</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>HS101</td><td>Essence of Indian Traditional Knowledge</td><td><span class="credits">0</span></td><td><span class="grade">S</span></td><td></td></tr>
+                    <tr><td>2023-2024 I</td><td>MA101</td><td>Linear Algebra and Ordinary Differential Equations</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>CS102</td><td>Data Structures</td><td><span class="credits">4</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">44, 5.73</span></td></tr>
+                    <tr><td>2023-2024 II</td><td>MT102</td><td>Engineering Graphics</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>CH102</td><td>Environmental Sciences</td><td><span class="credits">2</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>MA102</td><td>Higher Calculus</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>DS101</td><td>Introduction to AI and DS</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>PH101</td><td>Physics</td><td><span class="credits">5</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2023-2024 II</td><td>EG102</td><td>Professional Communication</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS203</td><td>DESIGN AND ANALYSIS OF ALGORITHMS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">67, 6.10</span></td></tr>
+                    <tr><td>2024-2025 III</td><td>MA202</td><td>DISCRETE MATHEMATICS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>MG201</td><td>ENGINEERING ECONOMICS AND MANAGEMENT</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>MA201</td><td>INTEGRAL TRANSFORMS AND PROBABILITY & STATISTICS</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>EC201</td><td>INTRODUCTION TO IOT</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS201</td><td>OBJECT ORIENTED PROGRAMMING CONCEPTS</td><td><span class="credits">4</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CR201</td><td>POWER SKILLS-I</td><td><span class="credits">1</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 III</td><td>CS202</td><td>THEORY OF COMPUTATION</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS204</td><td>COMPUTER ORGANIZATION AND ARCHITECTURE</td><td><span class="credits">3</span></td><td><span class="grade">B+</span></td><td><span class="cgpa">84, 6.54</span></td></tr>
+                    <tr><td>2024-2025 IV</td><td>DS203</td><td>DATA SCIENCE</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS206</td><td>DATABASE MANAGEMENT SYSTEMS</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>HS201</td><td>DYNAMICS OF SOCIAL CHANGE</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>EC102</td><td>FUNDAMENTALS OF SIGNAL PROCESSING</td><td><span class="credits">3</span></td><td><span class="grade">B</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>DS202</td><td>INDUSTRY CODING PRACTICE(PYTHON/R)</td><td><span class="credits">3</span></td><td><span class="grade">C</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CR202</td><td>POWER SKILLS - II</td><td><span class="credits">1</span></td><td><span class="grade">A</span></td><td></td></tr>
+                    <tr><td>2024-2025 IV</td><td>CS205</td><td>WEB-ENABLED TECHNOLOGIES</td><td><span class="credits">4</span></td><td><span class="grade">B+</span></td><td></td></tr>
+                    <tr><td>2024-2025 ST - II</td><td>IP201</td><td>INTERNSHIP-I</td><td><span class="credits">3</span></td><td><span class="grade">A+</span></td><td><span class="cgpa">87, 6.75</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- My Faculty Tab -->
+        <div id="my-faculty" class="tab-content">
+            <h3>My Faculty</h3>
+            <div class="dropdown">
+                <label for="faculty-semester">Select Semester: </label>
+                <select id="faculty-semester" onchange="showFaculty()">
+                    <option value="sem1">2023-2024 I</option>
+                    <option value="sem2">2023-2024 II</option>
+                    <option value="sem3">2024-2025 III</option>
+                    <option value="sem4">2024-2025 IV</option>
+                </select>
+            </div>
+            <table id="faculty-table">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Faculty Name</th>
+                        <th>Faculty Email ID</th>
+                    </tr>
+                </thead>
+                <tbody id="faculty-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <h3>Resources</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Resource Name</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Programming</td>
+                        <td>GeeksforGeeks</td>
+                        <td>Comprehensive tutorials and coding practice for C, C++, Python, and more.</td>
+                        <td><a href="https://www.geeksforgeeks.org/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Data Structures</td>
+                        <td>LeetCode</td>
+                        <td>Practice problems and interview preparation for Data Structures and Algorithms.</td>
+                        <td><a href="https://leetcode.com/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>Khan Academy</td>
+                        <td>Video lectures and exercises for Linear Algebra, Calculus, and Probability.</td>
+                        <td><a href="https://www.khanacademy.org/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Electronics</td>
+                        <td>All About Circuits</td>
+                        <td>Detailed guides and simulations for electronics and circuits.</td>
+                        <td><a href="https://www.allaboutcircuits.com/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Computer Networks</td>
+                        <td>TutorialsPoint</td>
+                        <td>Notes and tutorials for networking concepts and protocols.</td>
+                        <td><a href="https://www.tutorialspoint.com/computer_network/index.htm" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Operating Systems</td>
+                        <td>OSDev Wiki</td>
+                        <td>Advanced guides and resources for OS development and concepts.</td>
+                        <td><a href="https://wiki.osdev.org/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Database Management</td>
+                        <td>W3Schools SQL</td>
+                        <td>Beginner-friendly tutorials and practice for SQL and database concepts.</td>
+                        <td><a href="https://www.w3schools.com/sql/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Web Technologies</td>
+                        <td>MDN Web Docs</td>
+                        <td>Official documentation for HTML, CSS, and JavaScript.</td>
+                        <td><a href="https://developer.mozilla.org/en-US/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Artificial Intelligence</td>
+                        <td>Google AI</td>
+                        <td>Guides and resources for AI and machine learning.</td>
+                        <td><a href="https://ai.google/" target="_blank">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>Project Management</td>
+                        <td>Project Management Institute</td>
+                        <td>Resources and certifications for engineering project management.</td>
+                        <td><a href="https://www.pmi.org/" target="_blank">Visit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Electives Tab -->
+        <div id="electives" class="tab-content">
+            <div class="card">
+                <h3>Electives – To Be Decided</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Attendance data grouped by semester
+        const attendanceData = {
+            sem1: [
+                { id: "CHY101", name: "Chemistry", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS101", name: "Computer Programming", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "EC101", name: "Basic Electronics", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "EG101", name: "English Language Skills", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "HS101", name: "Essence of Indian Traditional Knowledge", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MA101", name: "Linear Algebra and Ordinary Differential Equations", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MT101", name: "Digital Fabrication", attendance: Math.floor(Math.random() * 32) + 67 }
+            ],
+            sem2: [
+                { id: "CH102", name: "Environmental Sciences", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS102", name: "Data Structures", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "DS101", name: "Introduction to AI and DS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "EG102", name: "Professional Communication", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MA102", name: "Higher Calculus", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MT102", name: "Engineering Graphics", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "PH101", name: "Physics", attendance: Math.floor(Math.random() * 32) + 67 }
+            ],
+            sem3: [
+                { id: "CR201", name: "POWER SKILLS-I", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS201", name: "OBJECT ORIENTED PROGRAMMING CONCEPTS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS202", name: "THEORY OF COMPUTATION", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS203", name: "DESIGN AND ANALYSIS OF ALGORITHMS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "EC201", name: "INTRODUCTION TO IOT", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MA201", name: "INTEGRAL TRANSFORMS AND PROBABILITY & STATISTICS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MA202", name: "DISCRETE MATHEMATICS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "MG201", name: "ENGINEERING ECONOMICS AND MANAGEMENT", attendance: Math.floor(Math.random() * 32) + 67 }
+            ],
+            sem4: [
+                { id: "CR202", name: "POWER SKILLS - II", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS204", name: "COMPUTER ORGANIZATION AND ARCHITECTURE", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS205", name: "WEB-ENABLED TECHNOLOGIES", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "CS206", name: "DATABASE MANAGEMENT SYSTEMS", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "DS202", name: "INDUSTRY CODING PRACTICE(PYTHON/R)", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "DS203", name: "DATA SCIENCE", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "EC102", name: "FUNDAMENTALS OF SIGNAL PROCESSING", attendance: Math.floor(Math.random() * 32) + 67 },
+                { id: "HS201", name: "DYNAMICS OF SOCIAL CHANGE", attendance: Math.floor(Math.random() * 32) + 67 }
+            ]
+        };
+
+        // Faculty data grouped by semester
+        const facultyData = {
+            sem1: [
+                { id: "CHY101", name: "Chemistry", faculty: "SYKAM KESAVARAO", email: "kesavaraosykam@ifheindia.org" },
+                { id: "CS101", name: "Computer Programming", faculty: "SANTOSH KUMAR SAHOO", email: "santosh.sahoo@ifheindia.org" },
+                { id: "EC101", name: "Basic Electronics", faculty: "PRASAD NIZAMPATNAM", email: "prasadnit@ifheindia.org" },
+                { id: "EG101", name: "English Language Skills", faculty: "MALOTH UPENDER", email: "upendermaloth@ifheindia.org" },
+                { id: "HS101", name: "Essence of Indian Traditional Knowledge", faculty: "K SHYAMALA REUBEN", email: "shyamalar@ifheinida.org" },
+                { id: "MA101", name: "Linear Algebra and Ordinary Differential Equations", faculty: "SUDHAAMSH MOHAN REDDY", email: "sudhamsh@ifheindia.org" },
+                { id: "MT101", name: "Digital Fabrication", faculty: "PRIYANKA CHATTORAJ", email: "priyanka.c@ifheindia.org" }
+            ],
+            sem2: [
+                { id: "CH102", name: "Environmental Sciences", faculty: "SYKAM KESAVARAO", email: "kesavaraosykam@ifheindia.org" },
+                { id: "CS102", name: "Data Structures", faculty: "RASHMI SAHAY", email: "rashmi.sahay@ifheindia.org" },
+                { id: "DS101", name: "Introduction to AI and DS", faculty: "BRAHMANAIDU", email: "brahmanaidu@ifheindia.org" },
+                { id: "EG102", name: "Professional Communication", faculty: "NILANJANA DEBNATH", email: "njd.nilanjana@ifheindia.org" },
+                { id: "MA102", name: "Higher Calculus", faculty: "SUDHAAMSH MOHAN REDDY", email: "sudhamsh@ifheindia.org" },
+                { id: "MT102", name: "Engineering Graphics", faculty: "VENU GOPAL", email: "chvenu@ifheindia.org" },
+                { id: "PH101", name: "Physics", faculty: "ASHWIN KUMAR MYAKALWAR", email: "ashwinjikumar@ifheindia.org" }
+            ],
+            sem3: [
+                { id: "CR201", name: "POWER SKILLS-I", faculty: "GOURI SANKHAR", email: "gsb_ad@ifheindia.org" },
+                { id: "CS201", name: "OBJECT ORIENTED PROGRAMMING CONCEPTS", faculty: "Sowjanya Ramisetty", email: "sowjanyaramisetty@ifheindia.org" },
+                { id: "CS202", name: "THEORY OF COMPUTATION", faculty: "MADHU", email: "madhu.bandari@ifheindia.org" },
+                { id: "CS203", name: "DESIGN AND ANALYSIS OF ALGORITHMS", faculty: "MADHUSMITA MAJHI", email: "drmadhusmita@ifheindia.org" },
+                { id: "EC201", name: "INTRODUCTION TO IOT", faculty: "SUDHEER", email: "hsudheer@ifheindia.org" },
+                { id: "MA201", name: "INTEGRAL TRANSFORMS AND PROBABILITY & STATISTICS", faculty: "DORADLA PANDU RANGA VENKATA SUBBA RAO", email: "sdprv@ifheindia.org" },
+                { id: "MA202", name: "DISCRETE MATHEMATICS", faculty: "UPENDAR MENDU", email: "drumendu@ifheindia.org" },
+                { id: "MG201", name: "ENGINEERING ECONOMICS AND MANAGEMENT", faculty: "VENKATA SIVA", email: "venkatasiva@ibsindia.org" }
+            ],
+            sem4: [
+                { id: "CR202", name: "POWER SKILLS - II", faculty: "GOURI SANKHAR", email: "gsb_ad@ifheindia.org" },
+                { id: "CS204", name: "COMPUTER ORGANIZATION AND ARCHITECTURE", faculty: "SANDEEP KUMAR PANDA", email: "sandeeppanda@ifheindia.org" },
+                { id: "CS205", name: "WEB-ENABLED TECHNOLOGIES", faculty: "Kaleem Mohammed", email: "mdkaleem@ifheindia.org" },
+                { id: "CS206", name: "DATABASE MANAGEMENT SYSTEMS", faculty: "SATHYA", email: "sathya.renu@ifheindia.org" },
+                { id: "DS202", name: "INDUSTRY CODING PRACTICE(PYTHON/R)", faculty: "L LAKSHMI", email: "laxmi.slv@ifheindia.org" },
+                { id: "DS203", name: "DATA SCIENCE", faculty: "V V SATYANARAYANA MURTY BOLLA", email: "satya.bolla@ifheindia.org" },
+                { id: "EC102", name: "FUNDAMENTALS OF SIGNAL PROCESSING", faculty: "DIGVIJAY VISHWANATHAN NAIR", email: "digvijay@ifheindia.org" },
+                { id: "HS201", name: "DYNAMICS OF SOCIAL CHANGE", faculty: "K SHYAMALA REUBEN", email: "shyamalar@ifheinida.org" }
+            ]
+        };
+
+        function showAttendance() {
+            const selectedSem = document.getElementById("attendance-semester").value;
+            const tbody = document.getElementById("attendance-body");
+            tbody.innerHTML = '';
+            attendanceData[selectedSem].forEach(course => {
+                const row = `<tr>
+                    <td>${course.id}</td>
+                    <td>${course.name}</td>
+                    <td>${course.attendance}%</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function showFaculty() {
+            const selectedSem = document.getElementById("faculty-semester").value;
+            const tbody = document.getElementById("faculty-body");
+            tbody.innerHTML = '';
+            facultyData[selectedSem].forEach(course => {
+                const row = `<tr>
+                    <td>${course.id}</td>
+                    <td>${course.name}</td>
+                    <td>${course.faculty}</td>
+                    <td><a href="mailto:${course.email}">${course.email}</a></td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // Show first semester by default
+        showAttendance();
+        showFaculty();
+        function toggleDropdown(submenuId){
+    document.querySelectorAll('.dropdown-submenu').forEach(s=>s.classList.remove('active'));
+    document.getElementById(submenuId).classList.toggle('active');
+}
+function showHelpDeskForm(formId){alert('Help Desk: '+formId);}
+// Initialize (if Attendance/Faculty exist)
+if(typeof showAttendance=='function') showAttendance();
+if(typeof showFaculty=='function') showFaculty();
+
+    </script>
+</body>
+</html>

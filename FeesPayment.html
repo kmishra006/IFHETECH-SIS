@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payment Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .sidebar {
+            background-color: navy;
+            color: white;
+            width: 250px;
+            min-height: 100vh;
+            padding: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+            overflow: visible;
+        }
+        .sidebar h2 {
+            margin: 0 0 20px 0;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .menu-item {
+            padding: 15px 20px;
+            background-color: #003366;
+            margin: 5px 15px;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .menu-item:hover, .menu-item.active {
+            background-color: #002244;
+        }
+        .dropdown-main { position: relative; }
+        .dropdown-submenu {
+            background-color: #002244;
+            margin: 0 15px 5px 15px;
+            border-radius: 0 0 5px 5px;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+        .dropdown-submenu.active { max-height: 500px; }
+        .dropdown-submenu .menu-item {
+            margin: 0;
+            background-color: transparent;
+            border-radius: 0;
+        }
+        .dropdown-submenu .menu-item:hover { background-color: #001122; }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .table-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 95%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        h2 { color: #003366; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>IFHE TECH</h2>
+        <a href="dashboard.html" class="menu-item">Dashboard</a>
+        <a href="NoticeBoard.html" class="menu-item">Notice Board</a>
+        <div class="menu-item dropdown-main" onclick="toggleDropdown('academics-submenu')">
+            📚 Academics
+        </div>
+        <div class="dropdown-submenu" id="academics-submenu">
+            <a href="Academics.html#attendance" class="menu-item">Attendance</a>
+            <a href="Academics.html#grade-list" class="menu-item">Grade List</a>
+            <a href="Academics.html#my-faculty" class="menu-item">My Faculty</a>
+            <a href="Academics.html#resources" class="menu-item">Resources</a>
+            <a href="Academics.html#electives" class="menu-item">Electives</a>
+        </div>
+        <a href="FeesPayment.html" class="menu-item active">Fees Payment</a>
+        <div class="menu-item dropdown-main" onclick="toggleDropdown('helpdesk-submenu')">
+            🆘 Help Desk
+        </div>
+        <div class="dropdown-submenu" id="helpdesk-submenu">
+            <a href="helpdesk.html#complaints" class="menu-item">Complaints</a>
+            <a href="helpdesk.html#leave" class="menu-item">Leave Form</a>
+            <a href="helpdesk.html#certificate" class="menu-item">Certificate(s)</a>
+        </div>
+        <a href="login.html" class="menu-item">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <div class="table-container">
+            <h2>Fee Payment Details</h2>
+           <table>
+                <thead>
+                    <tr>
+                        <th>S#</th>
+                        <th>Date</th>
+                        <th>DD No</th>
+                        <th>DD Date</th>
+                        <th>Amount</th>
+                        <th>Bank</th>
+                        <th>Particulars</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>26/08/2023</td><td>1976666/10452</td><td>13/07/2023</td><td>20000.00</td><td></td><td></td><td></td></tr>
+                    <tr><td>2</td><td>31/08/2023</td><td>1980852/11170</td><td>19/07/2023</td><td>65000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>3</td><td>31/08/2023</td><td>1980848/11171</td><td>19/07/2023</td><td>70000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>4</td><td>04/09/2023</td><td>2012615/20388</td><td>16/08/2023</td><td>24000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>5</td><td>16/01/2024</td><td>2087565/39073</td><td>09/01/2024</td><td>125000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>6</td><td>02/02/2024</td><td>2101265/43414</td><td>01/02/2024</td><td>24000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>7</td><td>11/03/2024</td><td>2117211/44982</td><td>06/03/2024</td><td>5000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>8</td><td>20/08/2024</td><td>2195295/18505</td><td>06/08/2024</td><td>50000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>9</td><td>22/08/2024</td><td>2199566/19945</td><td>08/08/2024</td><td>99000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>10</td><td>24/01/2025</td><td>2281812/41755</td><td>07/01/2025</td><td>50000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>11</td><td>24/01/2025</td><td>2281820/41756</td><td>07/01/2025</td><td>99000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>12</td><td>08/09/2025</td><td>2412346/23867</td><td>12/08/2025</td><td>50000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>13</td><td>08/09/2025</td><td>2412356/23868</td><td>12/08/2025</td><td>50000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>14</td><td>12/09/2025</td><td>2423144/25730</td><td>10/09/2025</td><td>25000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                    <tr><td>15</td><td>12/09/2025</td><td>2422792/25688</td><td>09/09/2025</td><td>24000.00</td><td>ICICI Bank</td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown(submenuId) {
+            document.querySelectorAll('.dropdown-submenu').forEach(s => s.classList.remove('active'));
+            document.getElementById(submenuId).classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
